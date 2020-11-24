@@ -6,7 +6,7 @@ Friendly user interface for <a href="http://dangerousprototypes.com/docs/Bus_Pir
 
 ## Features
 
-* Detect firmware available modes
+* Detect modes available in firmware
 * Automatically connect to the last selected port
 * Reopen last edited script
 
