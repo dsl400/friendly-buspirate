@@ -14,4 +14,4 @@ Designed to reduce the number of steps you need to take so you can focus on the 
 
 ## Notes
 
-* Only tested on windows machine
+* Only tested on windows
