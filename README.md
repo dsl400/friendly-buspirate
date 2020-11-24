@@ -2,7 +2,8 @@
 
 <img src="friendly-buspirate.png" align="right" width="500px">
 
-Friendly user interface for <a href="http://dangerousprototypes.com/docs/Bus_Pirate" target="_blank">Bus Pirate</a>
+Friendly user interface for <a href="http://dangerousprototypes.com/docs/Bus_Pirate" target="_blank">Bus Pirate</a> 
+Designed to reduce the number of steps you need to take so you can focus on the important part of your project
 
 ## Features
 
