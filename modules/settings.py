@@ -16,7 +16,7 @@
 
 import json
 
-_SETTINGS_FILE_NAME = 'pyrateLab.settings.json'
+_SETTINGS_FILE_NAME = 'settings.json'
 _DEFAULT_SETTINGS = {
 	'aux_mode':{
 		'power':'Off',
