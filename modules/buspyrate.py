@@ -62,10 +62,12 @@ class BusPyrate(Frame):
 				return False
 
 	def disconnect(self):
-		self.com.__del__()
-		del self.com
-		self.com = None
-		self.event_generate('<<disconnected>>',when='tail')
+		try:
+			self.com.__del__()
+			del self.com
+			self.com = None
+		except:
+			pass
 
 	def reset(self):
 		self.com.write('\x00'.encode())
@@ -74,6 +76,7 @@ class BusPyrate(Frame):
 		self.com.flushInput()
 
 	def send(self,cmd,newline = '\n'):
+		if self.com is None: return
 		self.com.write((cmd+newline).encode())
 
 	def exec(self):
