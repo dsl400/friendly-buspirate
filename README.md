@@ -8,6 +8,7 @@ Designed to reduce the number of steps you need to take so you can focus on the 
 
 ## Features
 
+* One click firmware upload
 * Detect modes available in firmware
 * Automatically connect to the last selected port
 * Reopen last edited script
