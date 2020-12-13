@@ -25,12 +25,6 @@ class Editor(Frame):
 		self.root = root
 		self.parent = parent
 		self.opened_file = None
-		# self.columnconfigure(0,weight=1)
-		# self.rowconfigure(0,weight=1)
-		# self.script_path_lbl = Label(self,text='Path:')
-		# self.script_path_lbl.grid(row=0,column=0,sticky='wns')
-		# self.script_path = ttk.Combobox(self,width=50)
-		# self.script_path.grid(row=0,column=1,sticky='wn')
 		self.editor = tkst.ScrolledText(self,tabstyle='wordprocessor')
 		self.editor.grid(row=0,column=0,columnspan=2,sticky='wens')
 		self.columnconfigure(0,weight=1)	

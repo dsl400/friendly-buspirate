@@ -26,6 +26,7 @@ from modules.aux_mode import AuxMode
 from modules.pinout import Pinout
 from modules.menu import AppMenu
 
+
 _WINDOW_TITLE = 'Friendly BusPirate (v0.1) - UI automation over BusPirate'
 
 
@@ -39,11 +40,14 @@ class App(tk.Tk):
 		self.protocol('WM_DELETE_WINDOW', self.close)
 		self.settings = Settings()
 		self.tasks = []
-		self.tasks.append(loop.create_task(self.updater(interval)))
+		self.create_task(self.updater(interval))
 		self.port = None
 		self.initUi()
 		self.columnconfigure(0,weight=1)
 		self.rowconfigure(0,weight=1)
+
+	def create_task(self,task):
+		self.tasks.append(loop.create_task(task))
 
 	def initUi(self):
 		root = PanedWindow(self, orient='horizontal')

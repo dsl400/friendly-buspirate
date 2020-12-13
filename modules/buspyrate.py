@@ -37,13 +37,7 @@ class BusPyrate(Frame):
 		self.last_v_index = None
 		self.last_line = 1
 		self.cmd_stack = Queue()
-		
-		# self.info = None
-		# self.version = None
-		# # self.read_info()
-		# self.current_mode = None
-		# self.pins = None
-
+		self.allow_read = True
 
 	def __call__(self):
 		return {'settings':None}
@@ -75,9 +69,10 @@ class BusPyrate(Frame):
 		self.send('#')
 		self.com.flushInput()
 
-	def send(self,cmd,newline = '\n'):
+	def send(self,cmd,end = '\n'):
 		if self.com is None: return
-		self.com.write((cmd+newline).encode())
+		if not self.allow_read: return
+		self.com.write((cmd+end).encode())
 
 	def exec(self):
 		self.last_line = self.console.index('end').split('.')[0]
@@ -91,11 +86,30 @@ class BusPyrate(Frame):
 		self.cmd_after = self.after(1000,self.exec)
 
 	def read_serial(self):
-		if self.com is None: return
-		if self.com.inWaiting() > 0:
+		if self.com is None:
+			if not self.parent.port_selector()['autoconnect']:
+				return
+			else:
+				self.parent.port_selector.connect()
+				self.after(1000,self.read_serial)
+				return
+		in_waiting = 0
+		try:
+			in_waiting = self.com.inWaiting()
+		except:
+			self.disconnect()
+			self.parent.port_selector.disconnected()
+			if not self.parent.port_selector()['autoconnect']:
+				return
+
+		if in_waiting > 0:
 			in_data = self.com.read(self.com.inWaiting())
-			self.print(in_data.decode('ascii'))
-		self.after(50,self.read_serial)
+			try:
+				self.print(in_data.decode('UTF8'))
+			except Exception as ex:
+				print(in_data,ex)
+		if self.allow_read:
+			self.after(50,self.read_serial)
 
 	def print(self,text):
 		self.console.configure(state='normal')
@@ -167,7 +181,7 @@ class BusPyrate(Frame):
 	def info(self):
 		self.send('i')
 
-	def mode(self,mode):	
+	def mode(self,mode):
 		self.current_mode = mode
 		for i, c in enumerate(mode):
 			if i == 0:

@@ -14,7 +14,7 @@
 
 #developed by Valentin Sasek <dsl400@gmail.com>
 
-import os
+from modules.menu_firmware import FirmwareMenu
 from tkinter import Menu
 
 class AppMenu(Menu):
@@ -33,7 +33,10 @@ class AppMenu(Menu):
 		m_file.add_separator()
 		m_file.add_command(label='Exit',command=root.close)
 		self.add_cascade(label='Run Script (F5)',command=self.root.console.run_script)
+		self.m_firmware = FirmwareMenu(self,root)
+		self.add_cascade(label='Firmware',menu=self.m_firmware)
 		self.add_command(label='About',command=self.root.about)
+
 
 	def clear_recent(self):
 		self.root.settings('recent',[])
@@ -44,3 +47,6 @@ class AppMenu(Menu):
 			self.m_recent.add_command(label=file,command=lambda file=file: self.root.editor.open(file))
 		self.m_recent.add_separator()
 		self.m_recent.add_command(label='Clear',command=self.clear_recent)
+		
+
+

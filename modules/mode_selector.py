@@ -31,8 +31,6 @@ class ModeSelector(Frame):
 		self.btn_get_modes = Button(self.fmode_HiZ, text='Get Modes')
 		self.btn_get_modes.place(relx=0.5, rely=0.5, anchor='center')
 
-
-
 		self.fmode_UART = Frame(self.modes_tabs,width=100,height=100,borderwidth=2,relief='groove')
 		lbl_baud = Label(self.fmode_UART,text='Speed (bps):')
 		lbl_baud.grid(row=0,column=0,pady=2)
